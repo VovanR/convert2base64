@@ -2,7 +2,7 @@
   "name": "convert2base64",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://vovanr.com/convert2base64/",
+  "homepage": "https://vovanr.com/convert2base64",
   "dependencies": {
     "classnames": "^2.2.6",
     "normalize.css": "^8.0.1",
