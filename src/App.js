@@ -1,26 +1,52 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useCallback, useState} from 'react';
+import {useDropzone} from 'react-dropzone';
+import classNames from 'classnames';
+import Copyright from './components/Copyright';
+import FileList from './components/FileList';
+import 'normalize.css';
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [files, setFiles] = useState([]);
+
+    const onDrop = useCallback(acceptedFiles => {
+        setFiles(acceptedFiles.map(file => Object.assign(file, {
+            preview: URL.createObjectURL(file),
+        })));
+    }, []);
+
+    const {
+        getRootProps,
+        getInputProps,
+        isDragActive,
+    } = useDropzone({onDrop});
+
+    return (
+        <div className="App">
+            <div
+                {...getRootProps()}
+                className={classNames('drop-zone', {
+                    'drop-zone_active': isDragActive,
+                })}
+            >
+                <input {...getInputProps()}/>
+
+                {isDragActive ? (
+                    <span>
+                        Drop the files here ...
+                    </span>
+                ) : (
+                    <span>
+                        Drag 'n' drop some files here, or click to select files
+                    </span>
+                )}
+            </div>
+
+            <FileList files={files}/>
+
+            <Copyright repoName="convert2base64"/>
+        </div>
+    );
 }
 
 export default App;
