@@ -22,6 +22,11 @@ class Output extends Component {
 		};
 	}
 
+	handleClick = (e) => {
+		e.target.select();
+		document.execCommand('copy');
+	};
+
 	render() {
 		if (!this.state.hash) {
 			return null;
@@ -31,6 +36,7 @@ class Output extends Component {
 			<textarea
 				className="output"
 				value={this.state.hash}
+				onClick={this.handleClick}
 				readOnly
 			/>
 		);

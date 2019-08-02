@@ -1,12 +1,16 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import Output from './Output';
 import './FileList.css';
 
 function FileList({files}) {
+	const onClickFileName = useCallback(e => {
+		e.target.select();
+		document.execCommand('copy');
+	});
+
 	return(
 		<ul className="file-list">
 			{files.map(file => {
-				console.log(file)
 				const filename = file.name.substring(0, file.name.lastIndexOf('.'));
 
 				return (
@@ -19,6 +23,7 @@ function FileList({files}) {
 
 							<input
 								value={filename}
+								onClick={onClickFileName}
 								readOnly
 							/>
 						</span>
