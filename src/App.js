@@ -19,18 +19,22 @@ function App() {
         getRootProps,
         getInputProps,
         isDragActive,
+        open,
     } = useDropzone({onDrop});
 
     return (
-        <div className="App">
+        <div
+            className="App"
+            {...getRootProps({onClick: e => e.stopPropagation()})}
+        >
+            <input {...getInputProps()}/>
+
             <div
-                {...getRootProps()}
                 className={classNames('drop-zone', {
                     'drop-zone_active': isDragActive,
                 })}
+                onClick={open}
             >
-                <input {...getInputProps()}/>
-
                 {isDragActive ? (
                     <span>
                         Drop the files here ...
