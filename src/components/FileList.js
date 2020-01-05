@@ -35,7 +35,7 @@ function FileList({files}) {
 				);
 			})}
 		</ul>
-	)
+	);
 }
 
 export default FileList;

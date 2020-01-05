@@ -8,7 +8,7 @@ function Copyright({repoName}) {
 			href={`https://github.com/vovanr/${repoName}`}
 			target="_blank"
 			rel="noopener noreferrer"
-			>
+    >
 			<span className="copyright__license">
 				MIT ©
 			</span>
