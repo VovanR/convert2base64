@@ -1,46 +1,36 @@
-import React, {Component} from 'react';
-import './Output.css';
+import React, {useCallback, useEffect, useState} from 'react'
+import './Output.css'
 
-class Output extends Component {
-	constructor(props) {
-		super(props);
+function Output({file}) {
+  const [hash, setHash] = useState('')
 
-		this.state = {
-			hash: ''
-		};
-	}
+  useEffect(() => {
+    const reader = new window.FileReader()
 
-	componentDidMount() {
-		const reader = new window.FileReader();
+    reader.readAsDataURL(file)
 
-		reader.readAsDataURL(this.props.file);
+    reader.onloadend = () => {
+      setHash(reader.result)
+    }
+  }, [])
 
-		reader.onloadend = () => {
-			this.setState({
-				hash: reader.result
-			});
-		};
-	}
+  const handleClick = useCallback(event => {
+    event.target.select()
+    document.execCommand('copy')
+  }, [])
 
-	handleClick = (e) => {
-		e.target.select();
-		document.execCommand('copy');
-	};
+  if (hash === '') {
+    return null
+  }
 
-	render() {
-		if (!this.state.hash) {
-			return null;
-		}
-
-		return (
-			<textarea
-				className="output"
-				value={this.state.hash}
-				onClick={this.handleClick}
-				readOnly
-			/>
-		);
-	}
+  return (
+    <textarea
+      className="output"
+      value={hash}
+      readOnly={true}
+      onClick={handleClick}
+    />
+  )
 }
 
-export default Output;
+export default Output

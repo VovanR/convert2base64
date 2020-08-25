@@ -1,41 +1,41 @@
-import React, {useCallback} from 'react';
-import Output from './Output';
-import './FileList.css';
+import React, {useCallback} from 'react'
+import Output from './Output'
+import './FileList.css'
 
 function FileList({files}) {
-	const onClickFileName = useCallback(e => {
-		e.target.select();
-		document.execCommand('copy');
-	});
+  const onClickFileName = useCallback(e => {
+    e.target.select()
+    document.execCommand('copy')
+  }, [])
 
-	return(
-		<ul className="file-list">
-			{files.map(file => {
-				const filename = file.name.substring(0, file.name.lastIndexOf('.'));
+  return(
+    <ul className="file-list">
+      {files.map(file => {
+        const filename = file.name.substring(0, file.name.lastIndexOf('.'))
 
-				return (
-					<li key={file.preview}>
-						<span className="file-list__preview">
-							<img
-								src={file.preview}
-								alt=""
-							/>
+        return (
+          <li key={file.preview}>
+            <span className="file-list__preview">
+              <img
+                src={file.preview}
+                alt=""
+              />
 
-							<input
-								value={filename}
-								onClick={onClickFileName}
-								readOnly
-							/>
-						</span>
+              <input
+                value={filename}
+                readOnly={true}
+                onClick={onClickFileName}
+              />
+            </span>
 
-						<span className="file-list__textarea">
-							<Output file={file}/>
-						</span>
-					</li>
-				);
-			})}
-		</ul>
-	);
+            <span className="file-list__textarea">
+              <Output file={file}/>
+            </span>
+          </li>
+        )
+      })}
+    </ul>
+  )
 }
 
-export default FileList;
+export default FileList

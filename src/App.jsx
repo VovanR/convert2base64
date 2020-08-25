@@ -1,37 +1,37 @@
-import React, {useCallback, useState} from 'react';
-import {useDropzone} from 'react-dropzone';
-import classNames from 'classnames';
-import Copyright from './components/Copyright';
-import FileList from './components/FileList';
-import 'normalize.css';
-import './App.css';
+import React, {useCallback, useState} from 'react'
+import {useDropzone} from 'react-dropzone'
+import classNames from 'classnames'
+import Copyright from './components/Copyright'
+import FileList from './components/FileList'
+import 'normalize.css'
+import './App.css'
 
 function App() {
-  const [files, setFiles] = useState([]);
+  const [files, setFiles] = useState([])
 
   const onDrop = useCallback(acceptedFiles => {
     setFiles(acceptedFiles.map(file => Object.assign(file, {
       preview: URL.createObjectURL(file),
-    })));
-  }, []);
+    })))
+  }, [])
 
   const {
     getRootProps,
     getInputProps,
     isDragActive,
     open,
-  } = useDropzone({onDrop});
+  } = useDropzone({onDrop})
 
   return (
     <div
       className="App"
-      {...getRootProps({onClick: e => e.stopPropagation()})}
+      {...getRootProps({onClick: event => event.stopPropagation()})}
     >
       <input {...getInputProps()}/>
 
       <div
         className={classNames('drop-zone', {
-          'drop-zone_active': isDragActive,
+        'drop-zone_active': isDragActive,
         })}
         onClick={open}
       >
@@ -50,7 +50,7 @@ function App() {
 
       <Copyright repoName="convert2base64"/>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
