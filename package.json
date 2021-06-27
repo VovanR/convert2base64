@@ -1,6 +1,7 @@
 {
   "name": "convert2base64",
   "version": "0.1.0",
+  "description": "Convert file to base64",
   "private": true,
   "homepage": "https://vovanr.com/convert2base64",
   "dependencies": {
